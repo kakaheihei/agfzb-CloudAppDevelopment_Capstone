@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["kakaheihei.eu-gb.cf.appdomain.cloud"]
+ALLOWED_HOSTS = ["localhost","kakaheihei.eu-gb.cf.appdomain.cloud"]
 
 
 # Application definition
