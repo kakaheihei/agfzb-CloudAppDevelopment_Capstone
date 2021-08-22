@@ -13,32 +13,64 @@ import json
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-
 # Create your views here.
 
-
 # Create an `about` view to render a static about page
- def about(request):
+def about(request):
     context = {}
     return render(request, 'djangoapp/about.html', context)
 
 
 # Create a `contact` view to return a static contact page
- def contact(request):
+def contact(request):
     context = {}
     return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
-# def login_request(request):
-# ...
+def login_request(request):
+    context = {}
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['pwd']
+        template_name = request.POST['template_name']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect(template_name)
+        else:
+            context['message'] = 'Invalid login'
+            context['template_name'] = template_name
+            return render (request, 'djangoapp/login.html', context)
 
 # Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
+def logout_request(request):
+    logout(request)
+    print("Log out the user `{}`".format(request.user.username))
+    return redirect(request.META['HTTP_REFERER'])
 
 # Create a `registration_request` view to handle sign up request
-# def registration_request(request):
-# ...
+def registration_request(request):
+    context = {}
+    if request.method == 'GET':
+        context['template_name'] = request.META['HTTP_REFERER']
+        return render(request, 'djangoapp/registration.html', context)
+    else:
+        username = request.POST['username']
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        password = request.POST['pwd']
+        email = request.POST['email']
+        template_name = request.POST['template_name']
+
+        try:
+            User.objects.get(username=username)
+            context['message'] = 'User already exists'
+            context['template_name'] = template_name
+            return render(request, 'djangoapp/registration.html', context)
+        except:
+            user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email, password=password)
+            login(request, user)
+            return redirect(template_name)
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):

@@ -23,7 +23,7 @@
                   <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealer Review</a>
             </div>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aira-controls="navbarNav" aria-expanded="false" aira-label="Toggle navigation"> 
-                <span class="navbar-toggler-icon"></span>span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
@@ -39,15 +39,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{user.username}}</a>
                     </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'djangoapp:logout' %}">Sign Out</a>
+                        </li>
                     {% else %}
                     <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" class="form-control mr-3" placeholder="Username" aria-placeholder="Username" name="username">
-                            <input type="password" class="form-control mr-3" placeholder="Password" aria-placeholder="Password" name="password">
+                            <input type="password" class="form-control mr-3" placeholder="Password" aria-placeholder="Password" name="psw">
                             <input type="hidden" name="template_name" value="djangoapp:index">
                             <button class="btn btn-primary mr-3" type="submit">Login</button>
-                            <a class="nav-link" href="{% url 'djangoapp:register' %}">Sign Up</a>
+                            <a class="nav-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
                         </div>
                     </form>
                     {% endif %}
