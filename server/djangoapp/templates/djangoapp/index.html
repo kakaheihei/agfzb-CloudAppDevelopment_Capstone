@@ -59,7 +59,40 @@
         </div>
     </nav>
     <!--Add a dealer table here -->
-
-    </body>
+    <div class="row">
+    <div class="col-12">
+        <table id="table" data-toggle="table" data-filter-control="true" class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th data-field="id">Identifier</th>
+                    <th data-field="name">Dealer Name</th>
+                    <th data-field="city">City</th>
+                    <th data-field="address" class="d-none d-lg-table-cell">Address</th>
+                    <th data-field="zip" class="d-none d-lg-table-cell">Zip</th>
+                    <th data-field="state" data-filter-control="select" data-filter-control-placeholder="State"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dealer in dealer_list %}
+                    <tr>
+                    <td>{{ dealer.id }}</td>
+                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}
+                    </a></td>
+                    <td>{{ dealer.city }}</td>
+                    <td>{{ dealer.address}}</td>
+                    <td>{{ dealer.zip}}</td>
+                    <td>{{ dealer.st }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+           </table>
+        </div>
+    </div>
+</body>
+<script>
+    $(function() {
+        $('#table').bootstrapTable()
+    })
+</script>
 
 </html>

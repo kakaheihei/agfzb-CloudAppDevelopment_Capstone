@@ -8,9 +8,60 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
+      <script type="text/javascript">
+          $('.date-own').datepicker({
+             format: 'mm/dd/yyyy'
+           });
+     </script>
 </head>
     <body>
     <!--Add review form here -->
+     <div class="container-fluid">
+         <h1 class="skeleton-heading">Add Review for the Dealer {{ dealer_id }}</h1>
+         <div class="row">
+              <div class="card-body bg-dark text-info col-md-12">
+                  {% if user.is_authenticated %}
+                  <form id="review_form" action="{% url 'djangoapp:add_review' dealer_id %}" method="post">
+                     {% csrf_token %}
+                     <div class="form-group text-white">
+                        <label for="name">Name</label>
+                         <input id="name" class="form-control bg-secondary text-white mr-2" type="text" name="name" placeholder="Enter your name..."
+                                value="{{ user.first_name }}" required>
+                     </div>
+                     <div class="form-group text-white">
+                        <label for="review">Review: </label>
+                        <textarea id="review" class="form-control bg-secondary text-white mr-2" name="review" placeholder="Enter your review ..." rows="3" required></textarea>
+                     </div>
+                      <div class="form-group form-check">
+                              <input type="checkbox" id="purchasecheck" class="form-check-input" name="purchasecheck" {% if not cars %}disabled{% endif %}>
+                              <label for="purchasecheck" class="text-white form-check-label">Have you purchased a vehicle from the dealer
+                                {{ dealer_id }}?</label>
+                              <p class="text-muted">(Please enter below the details of the purchased vehicle.)</p>
+                       </div>
+                      <div class="form-row">
+                        <div class="form-group col text-white">
+                        <label for="purchasedate">Select Your Purchase Date</label>
+                        <input id="purchasedate" class="form-control bg-secondary text-white mr-2" type="date"
+                               name="purchasedate" >
+                         </div>
+                         <div class="form-group col text-white">
+                            <label for="car">Select your car (car make - model-year):</label>
+                            <select id="car" class="custom-select bg-dark text-white" name="car" {% if not cars %}disabled{% endif %}>
+                                {% for car in cars %}
+                                <option value={{ car.id }}>{{ car.car_make.name }} {{ car.name }} - {{ car.year }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+
+                    <button class="btn bg-info text-white" type="submit">Save review</button>
+                 </form>
+                  {% else %}
+                    <p class="lead">Please login to add a review.</p>
+                  {% endif %}
+              </div>
+         </div>
+     </div>
     </body>
 </html>
