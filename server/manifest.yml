@@ -4,12 +4,8 @@
       - route: kakaheihei.eu-gb.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
-    env:
-      PATH: /tmp/contents557499043/deps/0/python/bin
   - name: djangoapp-nginx
     routes:
       - route: kakaheihei.eu-gb.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack
-    env:
-      PATH: /tmp/contents557499043/deps/0/python/bin
