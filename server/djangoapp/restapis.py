@@ -13,7 +13,7 @@ def get_request(url, **kwargs):
     try:
         if "api_key" in kwargs:
             # With Authentication
-            print("API_KEEEEEEY")
+            print("API_KEY")
             params = dict()
             params["text"] = kwargs.get("text")
             params["version"] = kwargs.get("version")
@@ -25,11 +25,10 @@ def get_request(url, **kwargs):
                                     headers={'Content-Type': 'application/json', 'X-Debug-Mode':'true'}, 
                                     params=params,
                                     auth=HTTPBasicAuth("apikey",str(kwargs.get("api_key"))))
-            print("RESPONSEEEEEEE")
             print(response)
         else:
             # Without Authentication
-            print("NOOOOOO API_KEEEEEEY")
+            print("No_API")
             response = requests.get(url, 
                                     headers={'Content-Type': 'application/json', 'X-Debug-Mode':'true'}, 
                                     params=kwargs)
@@ -52,7 +51,6 @@ def post_request(json_payload , url, **kwargs):
                                 headers={'Content-Type': 'application/json'},
                                 params=kwargs,
                                 json=json_payload)
-        print("RESPONSEEEEEEE")
         print(response)
         
            
