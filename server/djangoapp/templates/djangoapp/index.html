@@ -61,32 +61,33 @@
     <div class="row">
     <div class="col-12">
         <table id="table" data-toggle="table" data-filter-control="true" class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th data-field="id">Identifier</th>
-                    <th data-field="name">Dealer Name</th>
-                    <th data-field="city">City</th>
-                    <th data-field="address" class="d-none d-lg-table-cell">Address</th>
-                    <th data-field="zip" class="d-none d-lg-table-cell">Zip</th>
-                    <th data-field="state" data-filter-control="select" data-filter-control-placeholder="State"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dealer in dealer_list %}
-                    <tr>
-                    <td>{{ dealer.id }}</td>
-                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}
-                    </a></td>
-                    <td>{{ dealer.city }}</td>
-                    <td>{{ dealer.address}}</td>
-                    <td>{{ dealer.zip}}</td>
-                    <td>{{ dealer.st }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-           </table>
+                <table class="table" id="table" data-filter-control="true">
+                    <thead>
+                        <tr class="row100 head">
+                            <th class="cell100 column1" data-field="id">ID</th>
+                            <th class="cell100 column1" data-field="name">Dealer Name</th>
+                            <th class="cell100 column1" data-field="city">City</th>
+                            <th class="cell100 column1" data-field="address">Address</th>
+                            <th class="cell100 column1" data-field="zip">Zip</th>
+                            <th class="cell100 column1" data-field="state" data-filter-control="select">State</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody class="table100-body js-pscroll">
+                        {% for dealer in dealers %}
+                        <tr class="row100 body">
+                            <td class="cell100 column1">{{dealer.id}}</td>
+                            <td class="cell100 column1"><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                            <td class="cell100 column1">{{dealer.city}}</td>
+                            <td class="cell100 column1">{{dealer.address}}</td>
+                            <td class="cell100 column1">{{dealer.zip}}</td>
+                            <td class="cell100 column1">{{dealer.st}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 </body>
 <script>
     $(function() {
