@@ -12,7 +12,7 @@ import json
 
 # Get an instance of a logger
 from .models import CarDealer, CarModel
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, add_dealer_review_to_db
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, add_review_view
 
 logger = logging.getLogger(__name__)
 
