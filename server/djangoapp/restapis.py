@@ -55,8 +55,8 @@ def get_dealers_from_cf(**kwargs):
     # Call get_request with a URL parameter
     json_result = get_request(URL_DEALERSHIP_API)
     if json_result:
-        # Get the row list in JSON as dealers
-        dealers = json_result["entries"]
+        if 'entries' in json_result:
+            dealers = json_result['entries']
         # For each dealer object
         for dealer in dealers:
             print(dealer)
@@ -78,8 +78,8 @@ def get_dealers_by_state(st):
     # Call get_request with a URL parameter
     json_result = get_request(URL_DEALERSHIP_API, st=st)
     if json_result:
-        # Get the row list in JSON as dealers
-        dealers = json_result["entries"]
+        if 'entries' in json_result:
+        dealers = json_result['entries']
         # For each dealer object
         for dealer in dealers:
             print(dealer)
@@ -105,7 +105,7 @@ def get_dealer_reviews_from_cf(dealer_id):
         if json_result.get("error"):
             return []
         else:
-            reviews = json_result.get("entries")
+            reviews = json_result.get('entries')
             for rev in reviews:
                 review_obj = DealerReview(_id=rev.get("_id"),
                                           car_make=rev.get("car_make"),
