@@ -101,7 +101,7 @@ def get_dealerships(request):
     context = {}
     if request.method == "GET":
         # Get dealers from the URL
-        dealerships = get_dealers_from_cf(base_url + dealershipsPath)
+        dealerships = get_dealers_from_cf(https://62e7df6e.eu-gb.apigw.appdomain.cloud/api/dealership)
         print(dealerships)
         context['dealers'] = dealerships
         # Return list of dealerships
