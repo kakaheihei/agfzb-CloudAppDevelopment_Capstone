@@ -75,13 +75,14 @@
                 
                     <tbody class="table100-body js-pscroll">
                         {% for dealer in dealers %}
-                        <tr class="row100 body">
-                            <td class="cell100 column1">{{dealer.id}}</td>
-                            <td class="cell100 column1"><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
-                            <td class="cell100 column1">{{dealer.city}}</td>
-                            <td class="cell100 column1">{{dealer.address}}</td>
-                            <td class="cell100 column1">{{dealer.zip}}</td>
-                            <td class="cell100 column1">{{dealer.st}}</td>
+                        <tr>
+                        <td>{{ dealer.id }}</td>
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}
+                        </a></td>
+                        <td>{{ dealer.city }}</td>
+                        <td>{{ dealer.address}}</td>
+                        <td>{{ dealer.zip}}</td>
+                        <td>{{ dealer.st }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
